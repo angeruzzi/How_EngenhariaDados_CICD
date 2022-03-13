@@ -45,10 +45,7 @@ class S3Writter(DataWriter):
     def __init__(self, coin: str, api: str):
         super().__init__(coin, api)
         self.tempfile = NamedTemporaryFile()
-        self.client = boto3.client(
-            "s3",
-            'AKIAWHMSOQGTT6KRMO6N',
-            'UFQLseCM1K128YXVfLlCaul8YXGpZzs/sx6PS2Je')
+        self.client = boto3.client("s3")
         self.key = f"mercado_bitcoin/{self.api}/coin={self.coin}/extracted_at={datetime.datetime.now().date()}/{self.api}_{self.coin}_{datetime.datetime.now()}.json"
 
     def _write_row(self, row: str) -> None:
