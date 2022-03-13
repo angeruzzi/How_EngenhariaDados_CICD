@@ -2,8 +2,8 @@ import datetime
 import time
 
 from schedule import repeat, every, run_pending
-from mercado_bitcoin.ingestors import AwsDaySummaryIngestor
-from mercado_bitcoin.writers import S3Writter
+from ingestors import AwsDaySummaryIngestor
+from writers import S3Writter
 
 if __name__ == "__main__":
     day_summary_ingestor = AwsDaySummaryIngestor(

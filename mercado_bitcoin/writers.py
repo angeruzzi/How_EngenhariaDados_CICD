@@ -6,6 +6,9 @@ from typing import List
 
 import boto3
 
+#from dotenv import load_dotenv
+#from os import getenv
+#load_dotenv('.env')
 
 class DataTypeNotSupportedForIngestionException(Exception):
     def __init__(self, data):
@@ -42,7 +45,10 @@ class S3Writter(DataWriter):
     def __init__(self, coin: str, api: str):
         super().__init__(coin, api)
         self.tempfile = NamedTemporaryFile()
-        self.client = boto3.client("s3")
+        self.client = boto3.client(
+            "s3",
+            'AKIAWHMSOQGTT6KRMO6N',
+            'UFQLseCM1K128YXVfLlCaul8YXGpZzs/sx6PS2Je')
         self.key = f"mercado_bitcoin/{self.api}/coin={self.coin}/extracted_at={datetime.datetime.now().date()}/{self.api}_{self.coin}_{datetime.datetime.now()}.json"
 
     def _write_row(self, row: str) -> None:
@@ -55,5 +61,5 @@ class S3Writter(DataWriter):
 
     def _write_file_to_s3(self):
         self.client.put_object(
-            Body=self.tempfile, Bucket="belisco-data-lake-raw", Key=self.key
+            Body=self.tempfile, Bucket="angeruzzi-belisco-data-lake-raw", Key=self.key
         )
