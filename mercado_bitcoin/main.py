@@ -1,8 +1,3 @@
-#pip install requests
-#pip install schedule
-#pip install backoff
-#pip install ratelimit
-
 import datetime
 import time
 
